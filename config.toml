@@ -1,0 +1,13 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+disableKinds = ["page", "section", "taxonomy", "term"]
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = "0.75.0"
+
+[build]
+# Used by PurgeCSS
+writeStats = true
