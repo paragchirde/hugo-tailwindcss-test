@@ -3,10 +3,8 @@
 
 <head>
     <title>{{ .Title }}</title>
-
-    {{ $styles := resources.Get "css/main.css" }} {{ $styles = $styles | resources.PostCSS (dict "inlineImports" true) }} {{ if hugo.IsProduction }} {{ $styles = $styles | minify }} {{ end }}
-
-    <link href="{{ $styles.Permalink }}" rel="stylesheet" />
+    {{ $css := resources.Get "css/main.css" }} {{ $css = $css | resources.PostCSS }} {{ if hugo.IsProduction }} {{ $css = $css | minify | fingerprint | resources.PostProcess }} {{ end }}
+    <link href="{{ $css.RelPermalink }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -14,9 +12,7 @@
         <p class="font-bold italic text-xl">Brand</p>
         <p>Nav Items</p>
     </div>
-    <div class="">
-        {{ block "main" . }}{{ end }}
-    </div>
+    <div class="">{{ block "main" . }}{{ end }}</div>
     <div class="w-full mt-6 h-16 bg-gray-900 shadow-lg flex justify-center items-center px-8">
         <p class="text-gray-200 text-xl">Footer</p>
     </div>
